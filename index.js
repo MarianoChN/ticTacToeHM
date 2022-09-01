@@ -165,6 +165,12 @@ const ticTacToe = (() => {
 
         endGameSound.pause();
         endGameSound.currentTime = 0;
+        
+        playerSound1.pause();
+        playerSound1.currentTime = 0;
+        
+        playerSound2.pause();
+        playerSound2.currentTime = 0;
     };
 
     //events
