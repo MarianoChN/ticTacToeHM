@@ -23,8 +23,9 @@ const ticTacToe = (() => {
     //Sounds
 
 
-    const gameOverSound = new Audio( 'sounds/sound_game_over.wav'),
-          clickSound    = new Audio( 'sounds/sound_click.wav');
+    const endGameSound = new Audio( 'sounds/piano-suspenses-sound.mp3'),
+          playerSound1 = new Audio( 'sounds/bassReverb.mp3'),
+          playerSound2 = new Audio( 'sounds/synthBass.mp3');
         
 
 
@@ -72,7 +73,7 @@ const ticTacToe = (() => {
 
         gameOverArea.className = 'visible';
         gameOverText.innerText = text;
-        gameOverSound.play();
+        endGameSound.play();
 
     }
 
@@ -96,7 +97,7 @@ const ticTacToe = (() => {
 
                 gameOverScreen(tileValue1);
                 
-                break;
+                return;
             }
 
         }
@@ -132,14 +133,20 @@ const ticTacToe = (() => {
             tile.innerText = player_X;
             boardState[tileNumber - 1] = player_X;
             turn = player_O;
+
+            playerSound1.play();
+            playerSound2.pause();
+            playerSound2.currentTime = 0;
         }
         else{
             tile.innerText = player_O;
             boardState[tileNumber - 1] = player_O;
             turn = player_X;
-        }
 
-        clickSound.play();
+            playerSound2.play();
+            playerSound1.pause();
+            playerSound1.currentTime = 0;
+        }
         
         setHoverText();
 
@@ -155,6 +162,9 @@ const ticTacToe = (() => {
         tiles.forEach((tile) => (tile.innerText =''))
         turn = player_X;
         setHoverText();
+
+        endGameSound.pause();
+        endGameSound.currentTime = 0;
     };
 
     //events
